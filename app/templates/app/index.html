@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+	<title></title>
+</head>
+<body>
+    <span class="text-center"><h1>Room</h1></span>
+    <h2>{{request.user}}</h2>
+
+<form id="post-form">
+    {% csrf_token %}
+    <div class="text-center">
+        <textarea id="display_board" rows=10 cols=80>
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
+        </textarea>
+        <br>
+        <input id="msg" type="text" name="message" style="margin:10px" size=60 placeholder="Enter msg here" value="" autofocus>
+        <br>
+        <button id="submit_msg">Submit</button>
+    </div>
+</form>
+
+<script type="text/javascript" src="{% static 'app/websocket.js' %}"></script>
+
+</body>
+</html>
